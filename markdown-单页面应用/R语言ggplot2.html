@@ -1,0 +1,327 @@
+<html>
+  <head>
+	  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>i5ting_ztree_toc:R语言ggplot2</title>
+		<link href="toc/style/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/style/github2-d731afd4f624c99a4b19ad69f3083cd6d02b81d5.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/css/zTreeStyle/zTreeStyle.css" media="all" rel="stylesheet" type="text/css"/>
+	  <style>
+		pre {
+		    counter-reset: line-numbering;
+		    border: solid 1px #d9d9d9;
+		    border-radius: 0;
+		    background: #fff;
+		    padding: 0;
+		    line-height: 23px;
+		    margin-bottom: 30px;
+		    white-space: pre;
+		    overflow-x: auto;
+		    word-break: inherit;
+		    word-wrap: inherit;
+		}
+
+		pre a::before {
+		  content: counter(line-numbering);
+		  counter-increment: line-numbering;
+		  padding-right: 1em; /* space after numbers */
+		  width: 25px;
+		  text-align: right;
+		  opacity: 0.7;
+		  display: inline-block;
+		  color: #aaa;
+		  background: #eee;
+		  margin-right: 16px;
+		  padding: 2px 10px;
+		  font-size: 13px;
+		  -webkit-touch-callout: none;
+		  -webkit-user-select: none;
+		  -khtml-user-select: none;
+		  -moz-user-select: none;
+		  -ms-user-select: none;
+		  user-select: none;
+		}
+
+		pre a:first-of-type::before {
+		  padding-top: 10px;
+		}
+
+		pre a:last-of-type::before {
+		  padding-bottom: 10px;
+		}
+
+		pre a:only-of-type::before {
+		  padding: 10px;
+		}
+
+		.highlight { background-color: #ffffcc } /* RIGHT */
+		</style>
+  </head>
+  <body>
+	  <div>
+				<div style='width:25%;'>
+						<ul id="tree" class="ztree" style='width:100%'>
+
+						</ul>
+				</div>
+        <div id='readme' style='width:70%;margin-left:20%;'>
+          	<article class='markdown-body'>
+            	<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+<ul>
+<li><a href="#r语言之ggplot2画图篇">R语言之ggplot2画图篇</a><ul>
+<li><a href="#ggplot2-基本介绍-libraryggplot2">ggplot2 基本介绍 library(ggplot2)</a></li>
+<li><a href="#数据集mpg">数据集：mpg</a></li>
+<li><a href="#基本图形">基本图形</a><ul>
+<li><a href="#散点图-geompoint">散点图  ：geom_point()</a></li>
+<li><a href="#将年份映射到颜色属性-aexxycolour-factoryear">将年份映射到颜色属性   aex(x=,y=,colour =factor(year))</a></li>
+<li><a href="#增加平滑线-statsmooth">增加平滑线 :stat_smooth()</a></li>
+<li><a href="#两种等价的绘图方式">两种等价的绘图方式</a></li>
+<li><a href="#用标度来修改颜色取值-scalecolormanualvaluescbluered">用标度来修改颜色取值  scale_color_manual(values=c(&quot;blue&quot;,&quot;red&quot;))</a></li>
+<li><a href="#将排量映射到散点大小">将排量映射到散点大小</a></li>
+<li><a href="#用坐标控制图形显示的范围">用坐标控制图形显示的范围</a></li>
+<li><a href="#利用facet分别显示不同年份的数据">利用facet分别显示不同年份的数据</a></li>
+<li><a href="#增加图名并精细修改图例">增加图名并精细修改图例</a></li>
+</ul>
+</li>
+<li><a href="#直方图">直方图</a><ul>
+<li><a href="#-直方图的几何对象中内置有默认的统计变换">- 直方图的几何对象中内置有默认的统计变换</a></li>
+</ul>
+</li>
+<li><a href="#条形图-geombar">条形图 : geom_bar()</a><ul>
+<li><a href="#条形图排序">条形图排序</a></li>
+<li><a href="#条形图">条形图</a></li>
+<li><a href="#条形图-并立方式">条形图 并立方式</a></li>
+<li><a href="#条形图-叠加方式">条形图 叠加方式</a></li>
+<li><a href="#条形图-相对比例">条形图 相对比例</a></li>
+<li><a href="#条形图分面显示">条形图分面显示</a></li>
+</ul>
+</li>
+<li><a href="#饼图">饼图</a></li>
+<li><a href="#箱线图">箱线图</a><ul>
+<li><a href="#-箱线图">- 箱线图</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1 id="r-ggplot2-">R语言之ggplot2画图篇</h1>
+<h2 id="ggplot2-library-ggplot2-">ggplot2 基本介绍 library(ggplot2)</h2>
+<p><table class="table table-bordered table-striped table-condensed">
+  <tr>
+    <td> 数据（Data）和映射（Mapping）</td>
+    <td> 将数据中的变量映射到图形属性，映射控制了二者之间的关系</td>
+  <tr>
+  <tr>
+    <td> 标度（Scale）  </td>
+    <td> 标度负责控制映射后图形属性的显示方式，具体形式上看是图例和坐标刻度</td>
+  <tr>
+  <tr>
+    <td> 几何对象（Geometric）</td>
+    <td> 几何对象代表我们在图中实际看到的图形元素，如点、线、多边形等</td>
+  <tr>
+  <tr>
+    <td>统计变换（Statistics）</td>
+    <td>对原始数据进行某种计算，如对二元菜点图加上一条回归线</td>
+  <tr>
+  <tr>
+    <td>坐标系统（Coordinate）坐标系统控制坐标轴并影响所有图形元素，坐标轴可以进行变换以满足不同的需要</td>
+    <td>对原始数据进行某种计算，如对二元菜点图加上一条回归线</td>
+  <tr>
+  <tr>
+    <td>图层（Layer）</td>
+    <td>数据、映射、几何对象、统计变换等构成一个图层，图层可以允许用户一步步的构建图形，方便单独对图层进行修改</td>
+  <tr>
+  <tr>
+    <td>分面（Facet）</td>
+    <td>条件绘图，将数据按某种方式分组，然后分别绘图。分布就是控制分组绘图的方式和排列形式</td>
+  <tr></p>
+<table>
+
+<p>ggplot2图形对象是包含数据、映射、图层、标度、坐标和分面的列表，ggplot2绘图采用逐层叠加</p>
+<h2 id="-mpg">数据集：mpg</h2>
+<p>数据介绍：
+加载了 ggplot2 包后，里面自带了一个 mpg 数据集，共 234 条观测，是有关车辆燃料的。11 个变量如下：</p>
+<ul>
+<li>制造商：manufacturer</li>
+<li>模具型号：model</li>
+<li>排放量：displ (engine displacement, in litres)</li>
+<li>年份：year</li>
+<li>发动机数量：cyl (number of cylinders)</li>
+<li>变速器形式：trans (type of transmission)</li>
+<li>驱动形式：drv (f = front-wheel drive, r = rear wheel drive, 4 = 4wd)</li>
+<li>每加仑公路行驶距离：hwy (highway miles per gallon)</li>
+<li>燃料：fl (e: ethenol E85, d: diesel, r: regular, p: premium, c: CNG)</li>
+<li>车辆类型：class</li>
+</ul>
+<p><img src="assets/markdown-img-paste-20170412221244499.png" alt=""></p>
+<p>这里将主要利用这个数据集进行绘图。</p>
+<h2 id="-">基本图形</h2>
+<h3 id="-geom_point-">散点图  ：geom_point()</h3>
+<pre><code class="lang-js">  library(&#39;ggplot2&#39;)
+  map &lt;- ggplot(data = mpg,mapping= aes(x=cty,y=hwy)) # 加载数据、映射  
+  map + geom_point()
+  summary(map)  ##查看数据结构
+  summary(map+geom_point())  
+  ggsave(&#39;plog.png&#39;,width=5,height=5)  ##保存图形
+</code></pre>
+<p>  <img src="assets/markdown-img-paste-20170404113043944.png" alt=""></p>
+<h3 id="-aex-x-y-colour-factor-year-">将年份映射到颜色属性   aex(x=,y=,colour =factor(year))</h3>
+<pre><code class="lang-js">  map&lt;-ggplot(mpg,aes(x=cty,y=hwy,colour=factor(year)))  
+  map+geom_point()
+</code></pre>
+<p> <img src="assets/markdown-img-paste-20170411215601282.png" alt=""></p>
+<h3 id="-stat_smooth-">增加平滑线 :stat_smooth()</h3>
+<pre><code class="lang-js">    map&lt;-ggplot(mpg,aes(x=cty,y=hwy,colour=factor(year)))  
+  map+geom_point()+stat_smooth()
+</code></pre>
+<p>  <img src="assets/markdown-img-paste-20170411221443906.png" alt=""></p>
+<h3 id="-">两种等价的绘图方式</h3>
+<pre><code class="lang-js">  #方法一  
+  map&lt;-ggplot(mpg,aes(x=cty,y=hwy))  
+  map+geom_point(aes(colour=factor(year)))+stat_smooth()  
+  #方法二  
+  ggplot()+  
+    geom_point(data=mpg,aes(x=cty,y=hwy,colour=factor(year)))+  
+    stat_smooth(data=mpg,aes(x=cty,y=hwy))#此时除了底层画布外，有两个图层，分别定义了geom和stat
+</code></pre>
+<h3 id="-scale_color_manual-values-c-blue-red-">用标度来修改颜色取值  scale_color_manual(values=c(&quot;blue&quot;,&quot;red&quot;))</h3>
+<pre><code class="lang-js">  map&lt;-ggplot(mpg,aes(x=cty,y=hwy))  
+  map+geom_point(aes(colour=factor(year)))+stat_smooth()+scale_color_manual(values=c(&quot;blue&quot;,&quot;red&quot;))
+</code></pre>
+<p><img src="assets/markdown-img-paste-20170411222226267.png" alt=""></p>
+<h3 id="-">将排量映射到散点大小</h3>
+<pre><code class="lang-js">map+geom_point(aes(colour=factor(year),size=displ))+  
+  stat_smooth()+  
+  scale_color_manual(values=c(&quot;blue2&quot;,&quot;red4&quot;))
+</code></pre>
+<p><img src="assets/markdown-img-paste-20170411223440404.png" alt=""></p>
+<h3 id="-">用坐标控制图形显示的范围</h3>
+<pre><code class="lang-js">map+geom_point(aes(colour=factor(year),size=displ),alpha=0.5,position=&quot;jitter&quot;)+  
+  stat_smooth()+  
+  scale_color_manual(values=c(&quot;blue2&quot;,&quot;red4&quot;))+  
+  scale_size_continuous(range=c(4,10))+  
+  coord_cartesian(xlim=c(15,25),ylim=c(15,40))
+</code></pre>
+<p><img src="assets/markdown-img-paste-20170411224939509.png" alt=""></p>
+<h3 id="-facet-">利用facet分别显示不同年份的数据</h3>
+<pre><code class="lang-js">map+geom_point(aes(colour=class,size=displ),alpha=0.5,position=&quot;jitter&quot;)+  
+  stat_smooth()+  
+  scale_size_continuous(range=c(4,10))+  
+  facet_wrap(~year,ncol=1)
+</code></pre>
+<p><img src="assets/markdown-img-paste-20170411225112148.png" alt=""></p>
+<h3 id="-">增加图名并精细修改图例</h3>
+<pre><code class="lang-js">map&lt;-ggplot(mpg,aes(x=cty,y=hwy))  
+map+geom_point(aes(colour=class,size=displ),alpha=0.5,position=&quot;jitter&quot;)+  
+  stat_smooth()+  
+  scale_size_continuous(range=c(4,10))+  
+  facet_wrap(~year,ncol=1)+  
+  labs(x=&quot;每加仑高速公路行驶距离&quot;,y=&quot;每加仑城市公路行驶距离&quot;)+  
+  guides(size=guide_legend(title=&quot;排量&quot;),colour=guide_legend(titile=&quot;车型&quot;,override.aes=list(size=5)))
+</code></pre>
+<p><img src="assets/markdown-img-paste-20170411225437660.png" alt=""></p>
+<h2 id="-">直方图</h2>
+<pre><code class="lang-js">map&lt;-ggplot(mpg,aes(x=hwy))  
+map+geom_histogram()
+</code></pre>
+<p><img src="assets/markdown-img-paste-20170412212958241.png" alt=""></p>
+<h3 id="-">- 直方图的几何对象中内置有默认的统计变换</h3>
+<pre><code class="lang-js">map+geom_histogram(aes(fill=factor(year),y=..density..),alpha=0.3,colour=&quot;black&quot;)+  
+  stat_density(geom=&quot;line&quot;,position=&quot;identity&quot;,size=1.5,aes(colour=factor(year)))+  
+  facet_wrap(~year,ncol=1)
+</code></pre>
+<p><img src="assets/markdown-img-paste-20170412213235849.png" alt=""></p>
+<h2 id="-geom_bar-">条形图 : geom_bar()</h2>
+<p>默认纵轴是 x 轴上各离散类的计数（Count），对应的默认参数是 geom_bar(stat=&quot;count&quot;)</p>
+<pre><code class="lang-js">map&lt;-ggplot(mpg,aes(x=class))  
+map+geom_bar()
+</code></pre>
+<p><img src="assets/markdown-img-paste-20170412213414419.png" alt=""></p>
+<p>如果想用其他值代替，需要在 ggplot() 中指定 aes(y=) 参数，并且在条形图函数中改动为 geom_bar(stat=&quot;identity&quot;)。</p>
+<pre><code class="lang-js"># 以各类内部的排放量作为对应的 y 值，进行累加
+map = ggplot(mpg, aes(x=class, y=displ))
+map +  geom_bar(stat=&quot;identity&quot;)
+</code></pre>
+<p><img src="assets/markdown-img-paste-20170412222041420.png" alt=""></p>
+<p>权重：aes(weight=)
+下面的语句完成了同样的任务，只不过权重相当于使用了乘法。</p>
+<pre><code class="lang-js"># 权重。计算每个 class 内的排放总量
+map =ggplot(mpg, aes(class))
+map+  geom_bar(aes(weight=displ))
+</code></pre>
+<p><img src="assets/markdown-img-paste-20170412222529489.png" alt=""></p>
+<p>###　　条形图排序</p>
+<pre><code class="lang-js">＃对数据排序后，再画条形图，即可得到顺序条形图
+class2&lt;-mpg$class  
+class2&lt;-reorder(class2,class2,length)  
+mpg$class2&lt;-class2  
+map&lt;-ggplot(mpg,aes(x=class2))  
+map+geom_bar(aes(fill=class2))
+</code></pre>
+<p><img src="assets/markdown-img-paste-20170412213738839.png" alt=""></p>
+<p>###　 条形图</p>
+<pre><code class="lang-js">map&lt;-ggplot(mpg,aes(class2,fill=factor(year)))  
+map+geom_bar(position=&quot;identity&quot;,alpha=0.5)
+</code></pre>
+<p><img src="assets/markdown-img-paste-20170412214058114.png" alt=""></p>
+<h3 id="-">条形图 并立方式</h3>
+<pre><code class="lang-js">map&lt;-ggplot(mpg,aes(class2,fill=factor(year)))  
+map+geom_bar(position=&quot;dodge&quot;)
+</code></pre>
+<p><img src="assets/markdown-img-paste-20170412214241451.png" alt=""></p>
+<h3 id="-">条形图 叠加方式</h3>
+<pre><code class="lang-js">map&lt;-ggplot(mpg,aes(class2,fill=factor(year)))  
+map + geom_bar(position=&quot;stack&quot;)
+</code></pre>
+<p><img src="assets/markdown-img-paste-20170412214407596.png" alt=""></p>
+<h3 id="-">条形图 相对比例</h3>
+<pre><code class="lang-js">map&lt;-ggplot(mpg,aes(class2,fill=factor(year)))
+map+geom_bar(position=&quot;fill&quot;)
+</code></pre>
+<p><img src="assets/markdown-img-paste-20170412214549202.png" alt=""></p>
+<h3 id="-">条形图分面显示</h3>
+<pre><code class="lang-js">map&lt;-ggplot(mpg,aes(class2,fill=factor(year)))
+map +geom_bar(aes(fill=class2))+facet_wrap(~year)
+</code></pre>
+<p><img src="assets/markdown-img-paste-20170412214737500.png" alt=""></p>
+<h2 id="-">饼图</h2>
+<pre><code class="lang-js">map&lt;-ggplot(mpg,aes(x=factor(1),fill=factor(class)))+geom_bar(width=1)  
+map+coord_polar(theta=&quot;y&quot;)
+</code></pre>
+<p><img src="assets/markdown-img-paste-20170412214913234.png" alt=""></p>
+<h2 id="-">箱线图</h2>
+<pre><code class="lang-js">map&lt;-ggplot(mpg,aes(class,hwy,fill=class))  
+map+geom_boxplot()
+</code></pre>
+<p><img src="assets/markdown-img-paste-20170412215012633.png" alt=""></p>
+<h3 id="-">- 箱线图</h3>
+<pre><code class="lang-js">map&lt;-ggplot(mpg,aes(class,hwy,fill=class))  
+map+geom_violin(alpha=0.3,width=0.9)+geom_jitter(shape=21)
+</code></pre>
+<p><img src="assets/markdown-img-paste-20170412215140862.png" alt=""></p>
+<p>参考文章
+<a href="http://docs.ggplot2.org/current/">ggplot2 官方的函数索引教程</a>
+<a href="http://blog.csdn.net/lilanfeng1991/article/details/28665255">R语言之ggplot2画图篇</a>
+<a href="https://wklchris.github.io/R-ggplot2.html">R语言（ggplot2绘图）</a></p>
+
+          	</article>
+        </div>
+		</div>
+  </body>
+</html>
+<script type="text/javascript" src="toc/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="toc/js/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="toc/js/ztree_toc.js"></script>
+<script type="text/javascript" src="toc_conf.js"></script>
+
+<SCRIPT type="text/javascript" >
+<!--
+$(document).ready(function(){
+    var css_conf = eval(markdown_panel_style);
+    $('#readme').css(css_conf)
+    
+    var conf = eval(jquery_ztree_toc_opts);
+		$('#tree').ztree_toc(conf);
+});
+//-->
+</SCRIPT>

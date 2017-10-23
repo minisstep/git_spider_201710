@@ -1,0 +1,189 @@
+<html>
+  <head>
+	  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>i5ting_ztree_toc:atom_markdown</title>
+		<link href="toc/style/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/style/github2-d731afd4f624c99a4b19ad69f3083cd6d02b81d5.css" media="all" rel="stylesheet" type="text/css"/>
+		<link href="toc/css/zTreeStyle/zTreeStyle.css" media="all" rel="stylesheet" type="text/css"/>
+	  <style>
+		pre {
+		    counter-reset: line-numbering;
+		    border: solid 1px #d9d9d9;
+		    border-radius: 0;
+		    background: #fff;
+		    padding: 0;
+		    line-height: 23px;
+		    margin-bottom: 30px;
+		    white-space: pre;
+		    overflow-x: auto;
+		    word-break: inherit;
+		    word-wrap: inherit;
+		}
+
+		pre a::before {
+		  content: counter(line-numbering);
+		  counter-increment: line-numbering;
+		  padding-right: 1em; /* space after numbers */
+		  width: 25px;
+		  text-align: right;
+		  opacity: 0.7;
+		  display: inline-block;
+		  color: #aaa;
+		  background: #eee;
+		  margin-right: 16px;
+		  padding: 2px 10px;
+		  font-size: 13px;
+		  -webkit-touch-callout: none;
+		  -webkit-user-select: none;
+		  -khtml-user-select: none;
+		  -moz-user-select: none;
+		  -ms-user-select: none;
+		  user-select: none;
+		}
+
+		pre a:first-of-type::before {
+		  padding-top: 10px;
+		}
+
+		pre a:last-of-type::before {
+		  padding-bottom: 10px;
+		}
+
+		pre a:only-of-type::before {
+		  padding: 10px;
+		}
+
+		.highlight { background-color: #ffffcc } /* RIGHT */
+		</style>
+  </head>
+  <body>
+	  <div>
+				<div style='width:25%;'>
+						<ul id="tree" class="ztree" style='width:100%'>
+
+						</ul>
+				</div>
+        <div id='readme' style='width:70%;margin-left:20%;'>
+          	<article class='markdown-body'>
+            	<!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
+<ul>
+<li><a href="#atom-markdown-用法及相关插件使用介绍">atom markdown 用法及相关插件使用介绍</a><ul>
+<li><a href="#atom-markdown-插件">atom-markdown 插件</a><ul>
+<li><a href="#插件名称-markdown-img-paste-粘贴图片">插件名称  markdown-img-paste 粘贴图片</a></li>
+<li><a href="#插件名称-activate-power-mode-炫酷插件">插件名称 activate-power-mode 炫酷插件</a></li>
+<li><a href="#markdown-preview-enhanced-markdown增强插件">markdown-preview-enhanced markdown增强插件</a></li>
+<li><a href="#markdown-scroll-sync-预览与markdown同步">markdown-scroll-sync 预览与markdown同步</a></li>
+</ul>
+</li>
+<li><a href="#atom-插件安装">atom -插件安装</a><ul>
+<li><a href="#默认情况下中国使用atom安装总会失败各种失败各种错误">默认情况下，中国使用atom安装，总会失败，各种失败，各种错误；</a></li>
+</ul>
+</li>
+<li><a href="#markdown-站外插件-markdown-生成目录树">markdown 站外插件 markdown 生成目录树</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1 id="atom-markdown-">atom markdown 用法及相关插件使用介绍</h1>
+<h2 id="atom-markdown-">atom-markdown 插件</h2>
+<h3 id="-markdown-img-paste-">插件名称  markdown-img-paste 粘贴图片</h3>
+<p>  描述：markdown-img-paste 可直接截图，使用<code>crtl + shift + v</code> 粘贴图片到文档，
+  一个可以快速粘贴剪贴板里的照片到markdown的插件，并且可以设置使用七牛存储照片
+  其使用了七牛做为图片库；
+  插件github地址：<a href="https://atom.io/packages/markdown-img-paste">Markdown-img-paste</a>
+  简要说明：使用此插件需要申请七牛帐号，并获取七牛的开发密钥；</p>
+<h3 id="-activate-power-mode-">插件名称 activate-power-mode 炫酷插件</h3>
+<p>描述：让自己的字体动起来，炫酷插件；
+github地址：<a href="https://atom.io/packages/activate-power-mode">activate-power-mode</a>
+<img src="http://onrthgfnj.bkt.clouddn.com/FjcfJT6tVM4NkwNIzRIiJJIILQwW.gif" alt="activate-power-mode"></p>
+<h3 id="markdown-preview-enhanced-markdown-">markdown-preview-enhanced markdown增强插件</h3>
+<p>描述： markdown 写作必备插件
+支持特性</p>
+<ul>
+<li>编辑与预览滑动同步</li>
+<li>导入外部文件</li>
+<li>Code Chunks (beta)</li>
+<li>pandoc</li>
+<li>prince</li>
+<li>ebook</li>
+<li>Presentation Writer</li>
+<li>支持扩展</li>
+<li>数学编辑支持</li>
+<li>你可以选择 MathJax 或者 KaTeX 来渲染数学表达式</li>
+<li>导出 PDF, PNG, and JPEG 文件</li>
+<li>导出 HTML （完美支持移动端设备）</li>
+<li>编译成 Markdown 文件</li>
+<li>自定义 Markdown Preview 样式（css）</li>
+<li>TOC 自动生成 (beta)</li>
+<li>Flowchart / Sequence 等各种图</li>
+<li>Task List 任务列表 (Github Flavored)</li>
+<li>图片助手</li>
+<li>Footnotes</li>
+<li>Front Matter
+github地址<a href="https://github.com/shd101wyy/markdown-preview-enhanced/blob/0.10.12/docs/README_CN.md">Markdown Preview Enhanced</a>
+使用安装:参考github介绍及使用</li>
+</ul>
+<h3 id="markdown-scroll-sync-markdown-">markdown-scroll-sync 预览与markdown同步</h3>
+<p>描述：Auto-scroll markdown-preview tab to match markdown source.
+<img src="http://onrthgfnj.bkt.clouddn.com/FqfXLZLsdsE7XcAmrPSjX3Gnk4Eh.gif" alt="markdown-scroll-sync"></p>
+<h2 id="atom-">atom -插件安装</h2>
+<h3 id="-atom-">默认情况下，中国使用atom安装，总会失败，各种失败，各种错误；</h3>
+<p>这个就不要debug，默认都是服务器连接问题，被墙了，安装失败；</p>
+<p>解决办法是：手动安装
+直接下载github原始文件到本地，本体npm安装；
+具体办法：
+1.下载 插件到本地，存放到.../.atom/packages 目录
+2.使用cmd 命令 cd .../.atom/packages 目录下，执行npm install 插件文件夹名称
+示范：安装 markdown-document</p>
+<ol>
+<li>步骤1 进入到 .atom/packages目录：
+<img src="assets/markdown-img-paste-20170415110050820.png" alt=""></li>
+<li>步骤2：右键 git bash here ，将 markdown-document文件下载到本地 .atom/packages 目录
+<img src="assets/markdown-img-paste-20170415115226309.png" alt=""></li>
+<li>下载文件如图所示：
+<img src="assets/markdown-img-paste-20170415115335906.png" alt=""></li>
+<li>cmd 命令到 .atom/packages目录：
+<img src="assets/markdown-img-paste-20170415115318351.png" alt=""></li>
+<li>OK,安装完毕，重启Atom软件，good；
+<img src="assets/markdown-img-paste-20170415115525529.png" alt=""></li>
+</ol>
+<h2 id="markdown-markdown-">markdown 站外插件 markdown 生成目录树</h2>
+<p>markdown 生成目录树
+<img src="http://l.ruby-china.org/photo/2014/86d2a812e6b9f6d01e310dca6dd96263.png" alt="markdown 生成目录树"></p>
+<p>github地址<a href="https://github.com/i5ting/tocmd.npm">i5ting_toc</a></p>
+<ol>
+<li>Install   npm install -g i5ting_toc</li>
+<li>Usage  </li>
+</ol>
+<p>➜  tocmd.npm git:(master) ✗ i5ting_toc -h</p>
+<p>  Usage: i5ting_toc  a node npm wrapper of i5ting_ztree_toc <a href="https://github.com/i5ting/i5ting_ztree_toc">https://github.com/i5ting/i5ting_ztree_toc</a></p>
+<p>  Options:</p>
+<pre><code>-h, --help             output usage information
+-V, --version          output the version number
+-f, --file [filename]  default is README.md
+    -o, --open             open in browser
+-v, --verbose  
+</code></pre><p>  这个版本的命令比较简单，只有一个-f参数，如果没有填写，默认使用README.md，常见用法</p>
+<pre><code>i5ting_toc -f sample.md -o
+</code></pre>
+          	</article>
+        </div>
+		</div>
+  </body>
+</html>
+<script type="text/javascript" src="toc/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="toc/js/jquery.ztree.all-3.5.min.js"></script>
+<script type="text/javascript" src="toc/js/ztree_toc.js"></script>
+<script type="text/javascript" src="toc_conf.js"></script>
+
+<SCRIPT type="text/javascript" >
+<!--
+$(document).ready(function(){
+    var css_conf = eval(markdown_panel_style);
+    $('#readme').css(css_conf)
+    
+    var conf = eval(jquery_ztree_toc_opts);
+		$('#tree').ztree_toc(conf);
+});
+//-->
+</SCRIPT>

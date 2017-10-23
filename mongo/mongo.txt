@@ -1,0 +1,16 @@
+server :
+安装目录：cd /usr/local/mongodb  
+数据目录：/hadoop/mongodb/data/db     
+启动： /usr/local/mongodb/bin# mongod --dbpath=/hadoop/mongodb/data/db
+   
+添加一个管理员账户
+./bin mongo
+
+use admin
+db.createUser(
+   {
+     user: "kemi",
+     pwd: "kemi1016",
+     roles: [ "readWrite", "dbAdmin" ]
+   }
+)   
